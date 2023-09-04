@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { addPost } from "../api/postsFromApi";
+import { useMutation } from "react-query";
 
 
 const initialState= {
@@ -6,6 +8,10 @@ const initialState= {
     body: ""
 }
 const PostForm=()=>{
+
+    const addPostMutation=useMutation({
+        mutationFn: ()=> addPost(post)
+    })
 
     const [post, setPost]=useState(initialState);
 
@@ -28,9 +34,11 @@ const PostForm=()=>{
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log("post to add", post);
+        addPostMutation.mutate({...post});
         setPost(initialState);
     }
+
+
     
     return(
         <div>
