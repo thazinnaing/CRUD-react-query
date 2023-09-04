@@ -26,7 +26,6 @@ const EditPost=()=>{
             console.log("success update");
             navigate("/")
         }
-
     })
 
     if (isLoading) return <h1>Loading......</h1>;
