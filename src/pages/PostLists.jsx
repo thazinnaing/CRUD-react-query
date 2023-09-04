@@ -13,8 +13,10 @@ const PostLists = () => {
         error,
     } = useQuery({
         queryKey: ["posts"],
-        queryFn: ()=>fetchPosts,
+        queryFn: fetchPosts,
     });
+
+    
 
     if (isLoading) return <h1>Loading......</h1>;
     if (isError) return <h1>Error: {error}</h1>;
@@ -34,7 +36,7 @@ const PostLists = () => {
 
     return (
         <div>
-            {/* <AddPost /> */}
+            <AddPost />
             {postsContent}
         </div>
     );
