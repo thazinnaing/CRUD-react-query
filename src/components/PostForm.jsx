@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { addPost } from "../api/postsFromApi";
-import { useMutation } from "react-query";
 
 
-const initialState= {
-    title: "",
-    body: ""
-}
-const PostForm=()=>{
+const PostForm=({onSubmit,initialValue})=>{
 
-    const addPostMutation=useMutation({
-        mutationFn: ()=> addPost(post)
-    })
-
-    const [post, setPost]=useState(initialState);
+    const [post, setPost]=useState({
+        title: initialValue?.title || "",
+        body: initialValue?.body || ""
+    });
 
     const handleChangedInput=(e)=>{
         setPost({
@@ -34,11 +27,12 @@ const PostForm=()=>{
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        addPostMutation.mutate({...post});
-        setPost(initialState);
+        onSubmit(post);
+        setPost({
+            title: "",
+            body: ""
+        });
     }
-
-
     
     return(
         <div>

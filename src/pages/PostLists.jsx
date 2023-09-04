@@ -13,11 +13,13 @@ const PostLists = () => {
         error,
     } = useQuery({
         queryKey: ["posts"],
-        queryFn: fetchPosts,
+        queryFn: ()=>fetchPosts,
     });
 
     if (isLoading) return <h1>Loading......</h1>;
     if (isError) return <h1>Error: {error}</h1>;
+
+    console.log("posts list data", posts)
 
     const postsContent = posts?.map((post) => {
         return (
@@ -32,8 +34,8 @@ const PostLists = () => {
 
     return (
         <div>
-        <AddPost />
-        {postsContent}
+            {/* <AddPost /> */}
+            {postsContent}
         </div>
     );
     };
